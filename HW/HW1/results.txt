@@ -1,0 +1,7 @@
+HW1 $ iverilog -o hw1.ignore hw1.v
+HW1 $ vvp hw1.ignore
+A B |~A ~B|~A~B  ~(A+B)|~(AB) ~A+~B
+0 0 | 1 1 |  1      1  |  1     1
+0 1 | 1 0 |  0      0  |  1     1
+1 0 | 0 1 |  0      0  |  1     1
+1 1 | 0 0 |  0      0  |  0     0 
