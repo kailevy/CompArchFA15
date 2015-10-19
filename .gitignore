@@ -2,3 +2,5 @@
 *.desktop
 *.log
 *.vcd
+*.jar
+*.xdc
