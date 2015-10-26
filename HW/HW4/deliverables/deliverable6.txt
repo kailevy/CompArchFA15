@@ -1,0 +1,4 @@
+  The '<<' operator is a left shift. A 32-bit decoder will have exactly one bit as 1,
+and the rest 0s, and only if enable is on. Thus, we take the enable value and shift it
+left by the address. As a results, we will get a 1 (given that enable is on) at the bit
+equal to the address, and the rest of the bits will be 0s.
