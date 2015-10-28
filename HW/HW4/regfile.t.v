@@ -101,6 +101,7 @@ output reg		Clk
     Clk=0;
   end
 
+  integer index;
   // Once 'begintest' is asserted, start running test cases
   always @(posedge begintest) begin
     endtest = 0;
@@ -138,6 +139,60 @@ output reg		Clk
     $display("Test Case 2 Failed");
   end
 
+  // Test Case 8-2: Write Enable is ignored, register is always written to
+  WriteRegister = 5'd3;
+  WriteData = 32'd16;
+  RegWrite = 0;
+  ReadRegister1 = 5'd3;
+  ReadRegister2 = 5'd3;
+  #5 Clk=1; #5 Clk=0;
+
+  if((ReadData1 == WriteData) || (ReadData2 == WriteData)) begin
+    dutpassed = 0;
+    $display("Test Case 8-2 Failed: WriteEnable is broken");
+  end
+
+
+  // Test Case 8-3: Decoder is broken, all registers are written to
+  WriteRegister = 5'd4;
+  WriteData = 32'd17;
+  RegWrite = 1;
+  ReadRegister1 = 5'd6;
+  ReadRegister2 = 5'd7;
+  #5 Clk=1; #5 Clk=0;
+
+  if((ReadData1 == WriteData) && (ReadData2 == WriteData)) begin
+    dutpassed = 0;
+    $display("Test Case 8-3 Failed: Decoder is broken");
+  end
+
+  // Test Case 8-4: Zero register is broken, not constant 0
+  WriteRegister = 5'd7;
+  WriteData = 32'd16;
+  RegWrite = 0;
+  ReadRegister1 = 5'd0;
+  ReadRegister2 = 5'd0;
+  #5 Clk=1; #5 Clk=0;
+
+  if((ReadData1 != 32'd0) || (ReadData2 != 32'd0)) begin
+    dutpassed = 0;
+    $display("Test Case 8-4 Failed: Zero register is broken");
+  end
+
+  // Test Case 8-5  : Read data is always reading port a certain port
+  for (index = 32'd1; index < 32'd32; index = index + 32'd1) begin
+    WriteRegister = index;
+    WriteData = index;
+    RegWrite = 1;
+    ReadRegister1 = index;
+    ReadRegister2 = index;
+    #5 Clk=1; #5 Clk=0;
+
+    if((ReadData1 != WriteData) || (ReadData2 != WriteData)) begin
+      dutpassed = 0;
+      $display("Test Case 8-5 Failed: Port %d is reading port %d", ReadRegister1, ReadData1);
+    end
+  end
 
   // All done!  Wait a moment and signal test completion.
   #5
