@@ -1,3 +1,6 @@
 [submodule "Lab/Lab1"]
 	path = Lab/Lab1
 	url = https://github.com/phuston/CompArchLab1
+[submodule "Lab/Lab2"]
+	path = Lab/Lab2
+	url = https://github.com/nshlapo/CompArchLab2
