@@ -4,3 +4,6 @@
 [submodule "Lab/Lab2"]
 	path = Lab/Lab2
 	url = https://github.com/nshlapo/CompArchLab2
+[submodule "Lab/Lab3"]
+	path = Lab/Lab3
+	url = https://github.com/greneroom/CompArch-Lab3
