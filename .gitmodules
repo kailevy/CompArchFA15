@@ -7,3 +7,6 @@
 [submodule "Lab/Lab3"]
 	path = Lab/Lab3
 	url = https://github.com/greneroom/CompArch-Lab3
+[submodule "Async-System-Timing"]
+	path = Async-System-Timing
+	url = https://github.com/thecardkid/Async-System-Timing
